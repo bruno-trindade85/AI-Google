@@ -17,9 +17,9 @@ export const generatePromptsFromSrt = async (srtContent: string): Promise<string
   try {
     const response: GenerateContentResponse = await ai.models.generateContent({
       model: "gemini-2.5-flash",
-      contents: `Based on the following SRT subtitle content, generate 4 distinct and detailed image prompts. Each prompt must describe a scene suitable for an authentic, grainy, black and white photograph from the World War I or World War II era. The prompts should evoke a sense of history, drama, and the specific time period.
+      contents: `Com base no conteúdo da legenda SRT a seguir, gere 4 prompts de imagem distintos e detalhados. Cada prompt deve descrever uma cena adequada para uma fotografia autêntica, granulada e em preto e branco da era da Primeira ou Segunda Guerra Mundial. Os prompts devem evocar um senso de história, drama e o período de tempo específico.
 
-      SRT Content:
+      Conteúdo SRT:
       ---
       ${srtContent}
       ---
@@ -33,7 +33,7 @@ export const generatePromptsFromSrt = async (srtContent: string): Promise<string
               type: Type.ARRAY,
               items: {
                 type: Type.STRING,
-                description: "A detailed prompt for image generation.",
+                description: "Um prompt detalhado para geração de imagem.",
               },
             },
           },
@@ -48,8 +48,8 @@ export const generatePromptsFromSrt = async (srtContent: string): Promise<string
     }
     return [];
   } catch (error) {
-    console.error("Error generating prompts:", error);
-    throw new Error("Failed to generate prompts from SRT content.");
+    console.error("Erro ao gerar prompts:", error);
+    throw new Error("Falha ao gerar prompts a partir do conteúdo SRT.");
   }
 };
 
@@ -60,7 +60,7 @@ export const generatePromptsFromSrt = async (srtContent: string): Promise<string
  */
 export const generateImage = async (prompt: string): Promise<string> => {
   try {
-    const fullPrompt = `${prompt}, authentic black and white photograph, World War I style, grainy, high contrast, dramatic lighting, historical photo, 1940s aesthetic.`;
+    const fullPrompt = `${prompt}, fotografia autêntica em preto e branco, estilo Primeira Guerra Mundial, granulada, alto contraste, iluminação dramática, foto histórica, estética dos anos 1940.`;
     
     const response = await ai.models.generateImages({
         model: 'imagen-4.0-generate-001',
@@ -76,9 +76,9 @@ export const generateImage = async (prompt: string): Promise<string> => {
       const base64ImageBytes: string = response.generatedImages[0].image.imageBytes;
       return `data:image/jpeg;base64,${base64ImageBytes}`;
     }
-    throw new Error("No image was generated.");
+    throw new Error("Nenhuma imagem foi gerada.");
   } catch (error) {
-    console.error("Error generating image:", error);
-    throw new Error(`Failed to generate image for prompt: "${prompt}"`);
+    console.error("Erro ao gerar imagem:", error);
+    throw new Error(`Falha ao gerar imagem para o prompt: "${prompt}"`);
   }
 };

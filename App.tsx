@@ -22,7 +22,7 @@ const App: React.FC = () => {
     try {
       const prompts = await generatePromptsFromSrt(content);
       if (prompts.length === 0) {
-        throw new Error("No prompts were generated from the SRT file.");
+        throw new Error("Nenhum prompt foi gerado a partir do arquivo SRT.");
       }
       
       setLoadingState('generating_images');
@@ -36,7 +36,7 @@ const App: React.FC = () => {
       setLoadingState('done');
 
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'An unknown error occurred.';
+      const errorMessage = err instanceof Error ? err.message : 'Ocorreu um erro desconhecido.';
       console.error(err);
       setError(errorMessage);
       setLoadingState('error');
@@ -54,9 +54,9 @@ const App: React.FC = () => {
       case 'idle':
         return <FileUpload onFileSelect={handleFileSelect} disabled={false} />;
       case 'generating_prompts':
-        return <Loader message="Analyzing subtitles and generating creative prompts..." />;
+        return <Loader message="Analisando legendas e gerando prompts criativos..." />;
       case 'generating_images':
-        return <Loader message="Crafting historical images from prompts..." />;
+        return <Loader message="Criando imagens históricas a partir dos prompts..." />;
       case 'done':
         return (
           <>
@@ -66,7 +66,7 @@ const App: React.FC = () => {
                 onClick={handleReset}
                 className="bg-gray-700 text-white font-bold py-2 px-6 rounded-lg hover:bg-gray-600 transition-colors duration-300"
               >
-                Start Over
+                Começar de Novo
               </button>
             </div>
           </>
@@ -74,13 +74,13 @@ const App: React.FC = () => {
       case 'error':
         return (
           <div className="text-center p-8">
-            <h2 className="text-2xl text-red-400 mb-4">An Error Occurred</h2>
+            <h2 className="text-2xl text-red-400 mb-4">Ocorreu um Erro</h2>
             <p className="text-gray-400 bg-gray-800 p-4 rounded-md">{error}</p>
             <button
                 onClick={handleReset}
                 className="mt-6 bg-gray-700 text-white font-bold py-2 px-6 rounded-lg hover:bg-gray-600 transition-colors duration-300"
               >
-                Try Again
+                Tentar Novamente
               </button>
           </div>
         );
