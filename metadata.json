@@ -1,0 +1,5 @@
+{
+  "name": "WW-Era Image Generator from SRT",
+  "description": "Upload an SRT subtitle file to analyze its content and generate black and white, historical images in the style of World War I and II using AI.",
+  "requestFramePermissions": []
+}
